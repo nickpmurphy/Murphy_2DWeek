@@ -16,23 +16,24 @@ public class PlayerMovement : MonoBehaviour
 
     public int count;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI instructionsText;
+    public TextMeshProUGUI instructions1Text;
     float fallZone = -10f;
 
     public float threshold;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
       rB2D = GetComponent<Rigidbody2D>();
       SetText();
-
     }
 
     void SetText()
     {
       scoreText.text = "Your Score: " + count.ToString();
+      instructionsText.text = "Try to collect as many blue, shiny balls as you can!";
+      instructions1Text.text = "Press the 'E' key to access building, left click to place a block!";                     
     }
 
     // Update is called once per frame
