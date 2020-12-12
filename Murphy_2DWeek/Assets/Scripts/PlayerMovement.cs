@@ -16,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
 
     public int count;
     public TextMeshProUGUI scoreText;
+    float fallZone = -10f;
+
+    public float threshold;
+
 
 
     // Start is called before the first frame update
@@ -37,10 +41,17 @@ public class PlayerMovement : MonoBehaviour
       if(Input.GetButtonDown("Jump"))
       {
         int levelMask = LayerMask.GetMask("Level");
+        int levelMask2 = LayerMask.GetMask("SolidBlock");
         if(Physics2D.BoxCast(transform.position, new Vector2(1f, .1f), 0f, Vector2.down, .01f, levelMask))
         {
           Jump();
         }
+        if(Physics2D.BoxCast(transform.position, new Vector2(1f, .1f), 0f, Vector2.down, .01f, levelMask2))
+        {
+          Jump();
+        }
+
+  
     }
 
     SetText();
@@ -63,7 +74,14 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsRunning", true);
       }
       else
+      {
         animator.SetBool("IsRunning", false);
+      }
+
+      if (transform.position.y < threshold)
+      {
+        transform.position = new Vector3(3,6,0);
+      }
 
     }
 
